@@ -19,7 +19,7 @@ const AccountTypeSelectionPage: React.FC = () => {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-teal-500 rounded-3xl mb-6 shadow-lg">
             <Search className="h-10 w-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Welcome to LostFound</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Welcome to Losty</h1>
           <p className="text-xl text-gray-600 max-w-md mx-auto">
             Help reunite lost items with their owners. Choose your account type to get started.
           </p>
