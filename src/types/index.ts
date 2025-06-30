@@ -33,6 +33,11 @@ export interface Claim {
   claimantName: string;
   status: 'pending' | 'approved' | 'returning' | 'completed' | 'rejected';
   message: string;
+  proofImages?: string[];
+  proofDescription?: string;
+  contactMethod?: 'email' | 'phone' | 'both';
+  additionalInfo?: string;
+  chatId?: string;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -3,6 +3,7 @@ import { Search, Filter, SlidersHorizontal } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { useAuth } from '../context/AuthContext';
 import PostCard from '../components/PostCard';
+import ClaimModal from '../components/ClaimModal';
 import Navigation from '../components/Navigation';
 
 const HomePage: React.FC = () => {
@@ -10,6 +11,7 @@ const HomePage: React.FC = () => {
   const [filterType, setFilterType] = useState<'all' | 'lost' | 'found'>('all');
   const [filterCategory, setFilterCategory] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<string | null>(null);
   const { posts, addNotification } = useApp();
   const { user } = useAuth();
 
@@ -41,15 +43,15 @@ const HomePage: React.FC = () => {
   };
 
   const handleClaim = (postId: string) => {
-    addNotification({
-      userId: user!.id,
-      type: 'claim',
-      title: 'Claim Submitted',
-      message: 'Your claim has been submitted and is being reviewed.',
-      isRead: false,
-      relatedId: postId
-    });
+    setSelectedPost(postId);
   };
+
+  const handleClaimSuccess = () => {
+    setSelectedPost(null);
+    // Optionally show a success message or redirect
+  };
+
+  const selectedPostData = selectedPost ? posts.find(p => p.id === selectedPost) : null;
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -161,6 +163,15 @@ const HomePage: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* Claim Modal */}
+      {selectedPost && selectedPostData && (
+        <ClaimModal
+          post={selectedPostData}
+          onClose={() => setSelectedPost(null)}
+          onSuccess={handleClaimSuccess}
+        />
+      )}
     </div>
   );
 };
