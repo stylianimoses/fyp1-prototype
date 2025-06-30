@@ -9,7 +9,7 @@ interface AppContextType {
   meetings: Meeting[];
   addPost: (post: Omit<Post, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updatePost: (id: string, updates: Partial<Post>) => void;
-  addClaim: (claim: Omit<Claim, 'id' | 'createdAt' | 'updatedAt'>) => void;
+  addClaim: (claim: Omit<Claim, 'id' | 'updatedAt'>) => void;
   updateClaim: (id: string, updates: Partial<Claim>) => void;
   addNotification: (notification: Omit<Notification, 'id' | 'createdAt'>) => void;
   markNotificationRead: (id: string) => void;
@@ -87,11 +87,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     ));
   };
 
-  const addClaim = (claim: Omit<Claim, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const addClaim = (claim: Omit<Claim, 'id' | 'updatedAt'>) => {
     const newClaim: Claim = {
       ...claim,
       id: Date.now().toString(),
-      createdAt: new Date(),
       updatedAt: new Date()
     };
     setClaims(prev => [newClaim, ...prev]);

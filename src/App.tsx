@@ -11,6 +11,7 @@ import ActiveClaimsPage from './pages/ActiveClaimsPage';
 import NotificationsPage from './pages/NotificationsPage';
 import MyPostsPage from './pages/MyPostsPage';
 import AdminDashboard from './pages/AdminDashboard';
+import ClaimItemPage from './pages/ClaimItemPage';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, isLoading } = useAuth();
@@ -124,6 +125,14 @@ function App() {
                     <AdminRoute>
                       <AdminDashboard />
                     </AdminRoute>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/claim/:postId"
+                element={
+                  <ProtectedRoute>
+                    <ClaimItemPage />
                   </ProtectedRoute>
                 }
               />

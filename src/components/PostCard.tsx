@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart, Flag, HandHeart, MapPin, Calendar, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Post } from '../types';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -11,9 +12,14 @@ interface PostCardProps {
 }
 
 const PostCard: React.FC<PostCardProps> = ({ post, onLike, onReport, onClaim }) => {
+  const navigate = useNavigate();
+  
   const handleLike = () => onLike?.(post.id);
   const handleReport = () => onReport?.(post.id);
-  const handleClaim = () => onClaim?.(post.id);
+  const handleClaim = () => {
+    // Navigate to dedicated claim page instead of using modal
+    navigate(`/claim/${post.id}`);
+  };
 
   const statusColors = {
     active: 'bg-green-100 text-green-800',
